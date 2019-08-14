@@ -14,9 +14,7 @@ pipeline {
                 }
             }
             steps {
-                powershell '''
-                dotnet build $ENV:WORKSPACE/$($env:SOLUTION_PATH)
-                '''
+                echo "----------------------Building Started-------------------"
             }
          }
         }
