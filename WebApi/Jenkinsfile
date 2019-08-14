@@ -17,8 +17,11 @@ pipeline {
                 
                 powershell '''
                 echo "---------------------Build Project Started-----------------------------"
-                dotnet build $ENV:WORKSPACE/$($env:SOLUTION_PATH)
-                 echo "---------------------Build Project Ended-----------------------------" 
+                dotnet build $ENV:WORKSPACE/$($env:SOLUTION_PATH) -p:Configuration=release -v:n
+                echo "---------------------Build Project Ended-----------------------------" 
+                echo "---------------------Testing Project started-----------------------------"
+                dotnet test $ENV:WORKSPACE/$($env:TEST_PROJECT_PATH)
+                echo "---------------------Testing Project End---------------------------------"
                  '''
             }
          }
