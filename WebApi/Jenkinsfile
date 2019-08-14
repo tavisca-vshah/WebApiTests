@@ -14,8 +14,12 @@ pipeline {
                 }
             }
             steps {
-                echo "----------------------Building Started-------------------"
-                powershell '''echo $ENV:WORKSPACE '''
+                
+                powershell '''
+                echo "---------------------Build Project Started-----------------------------"
+                dotnet build $ENV:WORKSPACE/$($env:SOLUTION_PATH)
+                 echo "---------------------Build Project Ended-----------------------------" 
+                 '''
             }
          }
         }
