@@ -7,12 +7,14 @@ pipeline {
     }
     stages {
         
-            steps {
+            stages{
+                steps {
                 powershell '''
                 dotnet restore $ENV:WORKSPACE/$($env:SOLUTION_PATH) --source https://api.nuget.org/v3/index/json
                 dotnet build $ENV:WORKSPACE/$($env:SOLUTION_PATH) -p:Configuration=release -v:n
                 '''
             }
+        }
     }
         
 }
