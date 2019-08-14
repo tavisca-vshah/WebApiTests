@@ -15,7 +15,7 @@ pipeline {
             }
             steps {
                 echo "----------------------Building Started-------------------"
-                echo echo $ENV:WORKSPACE
+                echo $ENV:WORKSPACE
             }
          }
         }
