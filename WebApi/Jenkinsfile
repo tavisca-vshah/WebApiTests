@@ -15,9 +15,9 @@ pipeline {
                 }
             }
             steps {
-                sh '''
-                dotnet restore ${SOLUTION_PATH} --source https://api.nuget.org/v3/index/json
-                dotnet build ${SOLUTION_PATH} -p:Configuration=release -v:n
+                powershell '''
+                dotnet restore $ENV:WORKSPACE/$($env:SOLUTION_PATH) --source https://api.nuget.org/v3/index/json
+                dotnet build $ENV:WORKSPACE/$($env:SOLUTION_PATH) -p:Configuration=release -v:n
                 '''
             }
         }
@@ -28,9 +28,9 @@ pipeline {
                 }
             }
             steps {
-               sh'''
-            dotnet build ${SOLUTION_PATH} -p:Configuration=release -v:n
-               dotnet test ${TEST_PROJECT_PATH}
+               powershell'''
+               dotnet build $ENV:WORKSPACE/$($env:SOLUTION_PATH) -p:Configuration=release -v:n
+               dotnet test $ENV:WORKSPACE/$($env:TEST_PROJECT_PATH)
                '''               
             }
         }
