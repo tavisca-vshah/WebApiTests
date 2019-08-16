@@ -34,7 +34,7 @@ pipeline {
             steps {
                 powershell '''
                 echo "----------------------------Deploying Project Started-----------------------------"
-                docker run --rm -p 2000:80 pipe
+                docker run -d --rm -p 2000:80 pipe
                 echo "----------------------------Deploying Project Completed-----------------------------"
                 '''
             }
