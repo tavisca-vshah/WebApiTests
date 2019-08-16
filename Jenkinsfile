@@ -20,7 +20,7 @@ pipeline {
                 echo "----------------------------Test Project Completed-----------------------------"
                
                 echo "----------------------------Publishing Project Started-----------------------------"
-                dotnet publish $($ENV:SOLUTION_FILE_PATH) -c Release
+                dotnet publish $($ENV:SOLUTION_PATH) -c Release
                 echo "----------------------------Publishing Project Completed-----------------------------"
                
                 echo "----------------------------Docker Image Started-----------------------------"
