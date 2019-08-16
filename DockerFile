@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:2.2
-COPY WebApi/bin/Release/netcoreapp2.2/publish/. /app
+FROM mcr.microsoft.com/dotnet/core/aspnet:2.1
+COPY WebApi/bin/Release/netcoreapp2.1/publish/. /app
 EXPOSE 80
 CMD ["dotnet", "WebApi.dll"]
