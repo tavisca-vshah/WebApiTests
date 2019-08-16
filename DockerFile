@@ -1,4 +1,4 @@
-FROM From mcr.microsoft.com/dotnet/core/aspnet
+FROM mcr.microsoft.com/dotnet/core/aspnet
 WORKDIR /app
 COPY WebApi/bin/Release/netcoreapp2.1/publish/. /app
 EXPOSE 80
