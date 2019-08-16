@@ -2,7 +2,7 @@ pipeline {
     agent any
     parameters {
         string(name: 'GIT_HTTPS_PATH', defaultValue: 'https://github.com/tavisca-vshah/WebApiTests.git')
-        string(name: 'GIT_TEST_PATH', defaultValue: 'WebApi.Tests/WebApi.Tests.csproj')
+        string(name: 'TEST_FILE_PATH', defaultValue: 'WebApi.Tests/WebApi.Tests.csproj')
         string(name: 'SOLUTION_FILE_PATH', defaultValue: 'WebApi/WebApi.sln')
   }
 
