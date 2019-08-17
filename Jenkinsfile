@@ -4,8 +4,12 @@ pipeline {
         string(name: 'GIT_HTTPS_PATH', defaultValue: 'https://github.com/tavisca-vshah/WebApiTests.git')
         string(name: 'TEST_FILE_PATH', defaultValue: 'WebApi.Tests/WebApi.Tests.csproj')
         string(name: 'SOLUTION_FILE_PATH', defaultValue: 'WebApi/WebApi.sln')
+        string(name: 'SOLUTION_NAME', defaultValue: 'WebApi')
         string(name: 'Docker_IMAGE_TAG', defaultValue: '')
-        string(name: 'PORT_NO', defaultValue: '')
+        string(name: 'DOCKER_USERNAME', defaultValue: 'prakhargupta34')
+        string(name: 'DOCKER_PASSWORD');
+        string(name: 'DOCKER_REPO_NAME', defaultValue: 'samplewebapi')
+        
 
   }
 
@@ -23,11 +27,12 @@ pipeline {
                 echo "----------------------------Test Project Completed-----------------------------"
                
                 echo "----------------------------Publishing Project Started-----------------------------"
-                dotnet publish $($ENV:SOLUTION_FILE_PATH) -c Release
+                dotnet publish $($ENV:SOLUTION_FILE_PATH) -c Release -o ../publish
                 echo "----------------------------Publishing Project Completed-----------------------------"
                
                 echo "----------------------------Docker Image Started-----------------------------"
                 docker build --tag=$($ENV:Docker_IMAGE_TAG) .
+                docker build --tag=$($ENV:DOCKER_USERNAME)/$($ENV:DOCKER_REPO_NAME) --build-arg project_name=%PROJECT_NAME%.dll .
                 echo "----------------------------Docker Image Completed-----------------------------"
                 '''
             }
@@ -37,7 +42,8 @@ pipeline {
             steps {
                 powershell '''
                 echo "----------------------------Deploying Project Started-----------------------------"
-                echo " run -p $($ENV:PORT_NO):80 $($ENV:Docker_IMAGE_TAG):latest"
+                docker login -u $($ENV:DOCKER_USERNAME) -p $($ENV:DOCKER_PASSWORD)
+                docker push $($ENV:DOCKER_USERNAME)/$($ENV:DOCKER_REPO_NAME):latest
                 echo "----------------------------Deploying Project Completed-----------------------------"
                 '''
             }
