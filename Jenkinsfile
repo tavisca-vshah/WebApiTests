@@ -5,10 +5,9 @@ pipeline {
         string(name: 'TEST_FILE_PATH', defaultValue: 'WebApi.Tests/WebApi.Tests.csproj')
         string(name: 'SOLUTION_FILE_PATH', defaultValue: 'WebApi/WebApi.sln')
         string(name: 'SOLUTION_NAME', defaultValue: 'WebApi')
-        string(name: 'DOCKER_IMAGE_TAG', defaultValue: '')
         string(name: 'DOCKER_USERNAME', defaultValue: 'vshahks4578')
         string(name: 'DOCKER_PASSWORD');
-        string(name: 'DOCKER_REPO_NAME', defaultValue: 'samplewebapi')
+        string(name: 'DOCKER_REPO_NAME', defaultValue: 'webapi')
         
 
   }
