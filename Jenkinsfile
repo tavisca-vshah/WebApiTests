@@ -4,6 +4,9 @@ pipeline {
         string(name: 'GIT_HTTPS_PATH', defaultValue: 'https://github.com/tavisca-vshah/WebApiTests.git')
         string(name: 'TEST_FILE_PATH', defaultValue: 'WebApi.Tests/WebApi.Tests.csproj')
         string(name: 'SOLUTION_FILE_PATH', defaultValue: 'WebApi/WebApi.sln')
+        string(name: 'Docker_IMAGE_TAG', defaultValue: '')
+        string(name: 'PORT_NO', defaultValue: '')
+
   }
 
     stages {
@@ -24,7 +27,7 @@ pipeline {
                 echo "----------------------------Publishing Project Completed-----------------------------"
                
                 echo "----------------------------Docker Image Started-----------------------------"
-                docker build --tag=pipe .
+                docker build --tag=$($ENV:Docker_IMAGE_TAG) .
                 echo "----------------------------Docker Image Completed-----------------------------"
                 '''
             }
@@ -34,7 +37,7 @@ pipeline {
             steps {
                 powershell '''
                 echo "----------------------------Deploying Project Started-----------------------------"
-                docker run -d --rm -p 2000:80 pipe
+                docker run -p $($ENV:PORT_NO):80 $($ENV:Docker_IMAGE_TAG)
                 echo "----------------------------Deploying Project Completed-----------------------------"
                 '''
             }
