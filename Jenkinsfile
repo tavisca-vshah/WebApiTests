@@ -5,8 +5,8 @@ pipeline {
         string(name: 'TEST_FILE_PATH', defaultValue: 'WebApi.Tests/WebApi.Tests.csproj')
         string(name: 'SOLUTION_FILE_PATH', defaultValue: 'WebApi/WebApi.sln')
         string(name: 'SOLUTION_NAME', defaultValue: 'WebApi')
-        string(name: 'Docker_IMAGE_TAG', defaultValue: '')
-        string(name: 'DOCKER_USERNAME', defaultValue: 'prakhargupta34')
+        string(name: 'DOCKER_IMAGE_TAG', defaultValue: '')
+        string(name: 'DOCKER_USERNAME', defaultValue: 'vshahks4578')
         string(name: 'DOCKER_PASSWORD');
         string(name: 'DOCKER_REPO_NAME', defaultValue: 'samplewebapi')
         
@@ -31,8 +31,7 @@ pipeline {
                 echo "----------------------------Publishing Project Completed-----------------------------"
                
                 echo "----------------------------Docker Image Started-----------------------------"
-                docker build --tag=$($ENV:Docker_IMAGE_TAG) .
-                docker build --tag=$($ENV:DOCKER_USERNAME)/$($ENV:DOCKER_REPO_NAME) --build-arg project_name=%PROJECT_NAME%.dll .
+                docker build --tag=$($ENV:DOCKER_USERNAME)/$($ENV:DOCKER_REPO_NAME) --build-arg project_name=$($ENV:SOLUTION_NAME).dll .
                 echo "----------------------------Docker Image Completed-----------------------------"
                 '''
             }
