@@ -37,7 +37,7 @@ pipeline {
             steps {
                 powershell '''
                 echo "----------------------------Deploying Project Started-----------------------------"
-                docker run -p $($ENV:PORT_NO):80 $($ENV:Docker_IMAGE_TAG)::latest
+                docker run -p $($ENV:PORT_NO):80 $($ENV:Docker_IMAGE_TAG):latest
                 echo "----------------------------Deploying Project Completed-----------------------------"
                 '''
             }
