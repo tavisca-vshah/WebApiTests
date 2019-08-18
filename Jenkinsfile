@@ -8,7 +8,7 @@ pipeline {
         string(name: 'DOCKER_USERNAME', defaultValue: 'vshahks4578')
         string(name: 'DOCKER_PASSWORD',defaultValue:'@V49K52A4D@')
         string(name: 'DOCKER_REPO_NAME',defaultValue:'vshahks4578/webapi')
-        string(name: 'IMAGE_VERSION',defaultValue:'latest')
+        string(name: 'IMAGE_VERSION', defaultValue:'latest')
   }
 
     stages {
@@ -29,7 +29,7 @@ pipeline {
                 echo "----------------------------Publishing Project Completed-----------------------------"
                
                 echo "----------------------------Docker Image Started-----------------------------"
-                docker build --tag=%ENV:DOCKER_REPO_NAME%:%IMAGE_VERSION% --build-arg project_name=%SOLUTION_NAME%.dll .
+                docker build -t %DOCKER_REPO_NAME%:%IMAGE_VERSION% --build-arg project_name=%SOLUTION_NAME%.dll .
                 echo "----------------------------Docker Image Completed-----------------------------"
                 '''
             }
