@@ -14,22 +14,22 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                powershell '''
+                bat '''
               
                 echo "----------------------------Build Project Started-----------------------------"
-                dotnet build $($ENV:SOLUTION_FILE_PATH) -p:Configuration=release -v:n
+                dotnet build %SOLUTION_FILE_PATH% -p:Configuration=release -v:n
                 echo "----------------------------Build Project Completed-----------------------------"
                
                 echo "----------------------------Test Project Started-----------------------------"
-                dotnet test $($ENV:TEST_FILE_PATH)
+                dotnet test %TEST_FILE_PATH%
                 echo "----------------------------Test Project Completed-----------------------------"
                
                 echo "----------------------------Publishing Project Started-----------------------------"
-                dotnet publish $($ENV:SOLUTION_FILE_PATH) -c Release -o ../publish
+                dotnet publish %SOLUTION_FILE_PATH% -c Release -o ../publish
                 echo "----------------------------Publishing Project Completed-----------------------------"
                
                 echo "----------------------------Docker Image Started-----------------------------"
-                docker build --tag=$($ENV:DOCKER_REPO_NAME):$($ENV:IMAGE_VERSION) --build-arg project_name=$($ENV:SOLUTION_NAME).dll .
+                docker build --tag=%ENV:DOCKER_REPO_NAME%:%IMAGE_VERSION% --build-arg project_name=%SOLUTION_NAME%.dll .
                 echo "----------------------------Docker Image Completed-----------------------------"
                 '''
             }
@@ -37,10 +37,10 @@ pipeline {
                
         stage('Deploy') {
             steps {
-                powershell '''
+                bat '''
                 echo "----------------------------Deploying Project Started-----------------------------"
-                docker login -u $($ENV:DOCKER_USERNAME) -p $($ENV:DOCKER_PASSWORD)
-                docker push $($ENV:DOCKER_REPO_NAME):$($ENV:IMAGE_VERSION)
+                docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%
+                docker push %DOCKER_REPO_NAME%:%IMAGE_VERSION%
                 echo "----------------------------Deploying Project Completed-----------------------------"
                 '''
             }
