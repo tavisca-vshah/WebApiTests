@@ -8,8 +8,7 @@ pipeline {
         string(name: 'DOCKER_USERNAME', defaultValue: 'vshahks4578')
         string(name: 'DOCKER_PASSWORD');
         string(name: 'DOCKER_REPO_NAME')
-        
-
+        string(name: 'IMAGE_VERSION','latest')
   }
 
     stages {
@@ -30,7 +29,7 @@ pipeline {
                 echo "----------------------------Publishing Project Completed-----------------------------"
                
                 echo "----------------------------Docker Image Started-----------------------------"
-                docker build --tag=$($ENV:DOCKER_REPO_NAME) --build-arg project_name=$($ENV:SOLUTION_NAME).dll .
+                docker build --tag=$($ENV:DOCKER_REPO_NAME):$($ENV:IMAGE_VERSION) --build-arg project_name=$($ENV:SOLUTION_NAME).dll .
                 echo "----------------------------Docker Image Completed-----------------------------"
                 '''
             }
@@ -41,7 +40,7 @@ pipeline {
                 powershell '''
                 echo "----------------------------Deploying Project Started-----------------------------"
                 docker login -u $($ENV:DOCKER_USERNAME) -p $($ENV:DOCKER_PASSWORD)
-                docker push $($ENV:DOCKER_REPO_NAME)
+                docker push $($ENV:DOCKER_REPO_NAME):$($ENV:IMAGE_VERSION)
                 echo "----------------------------Deploying Project Completed-----------------------------"
                 '''
             }
