@@ -30,7 +30,7 @@ pipeline {
                 echo "----------------------------Publishing Project Completed-----------------------------"
                
                 echo "----------------------------Docker Image Started-----------------------------"
-                docker build --tag=$($ENV:DOCKER_USERNAME)/$($ENV:DOCKER_REPO_NAME) --build-arg project_name=$($ENV:SOLUTION_NAME).dll .
+                docker build --tag=$($ENV:DOCKER_REPO_NAME) --build-arg project_name=$($ENV:SOLUTION_NAME).dll .
                 echo "----------------------------Docker Image Completed-----------------------------"
                 '''
             }
@@ -41,7 +41,7 @@ pipeline {
                 powershell '''
                 echo "----------------------------Deploying Project Started-----------------------------"
                 docker login -u $($ENV:DOCKER_USERNAME) -p $($ENV:DOCKER_PASSWORD)
-                docker push $($ENV:DOCKER_USERNAME)/$($ENV:DOCKER_REPO_NAME):latest
+                docker push $($ENV:DOCKER_REPO_NAME):latest
                 echo "----------------------------Deploying Project Completed-----------------------------"
                 '''
             }
