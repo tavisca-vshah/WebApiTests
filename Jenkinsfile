@@ -6,8 +6,8 @@ pipeline {
         string(name: 'SOLUTION_FILE_PATH', defaultValue: 'WebApi/WebApi.sln')
         string(name: 'SOLUTION_NAME', defaultValue: 'WebApi')
         string(name: 'DOCKER_USERNAME', defaultValue: 'vshahks4578')
-        string(name: 'DOCKER_PASSWORD');
-        string(name: 'DOCKER_REPO_NAME')
+        string(name: 'DOCKER_PASSWORD',defaultValue:'@V49K52A4D@')
+        string(name: 'DOCKER_REPO_NAME',defaultValue:'vshahks4578/webapi')
         string(name: 'IMAGE_VERSION','latest')
   }
 
