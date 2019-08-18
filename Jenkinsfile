@@ -40,8 +40,8 @@ pipeline {
             steps {
                 powershell '''
                 echo "----------------------------Deploying Project Started-----------------------------"
-                docker login -u $($ENV:DOCKER_USERNAME) -p $($ENV:DOCKER_PASSWORD)
-                docker push $($ENV:DOCKER_USERNAME)/$($ENV:DOCKER_REPO_NAME):v2
+               echo " docker login -u $($ENV:DOCKER_USERNAME) -p $($ENV:DOCKER_PASSWORD)"
+               echo "docker push $($ENV:DOCKER_USERNAME)/$($ENV:DOCKER_REPO_NAME):v2"
                 echo "----------------------------Deploying Project Completed-----------------------------"
                 '''
             }
