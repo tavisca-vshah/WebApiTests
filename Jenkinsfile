@@ -41,7 +41,7 @@ pipeline {
                 powershell '''
                 echo "----------------------------Deploying Project Started-----------------------------"
                 docker login -u $($ENV:DOCKER_USERNAME) -p $($ENV:DOCKER_PASSWORD)
-                docker push vshahks4578/webapi:v2
+                docker push vshahks4578/webapi:latest
                 echo "----------------------------Deploying Project Completed-----------------------------"
                 '''
             }
