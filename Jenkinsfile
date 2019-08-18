@@ -44,7 +44,7 @@ pipeline {
                 docker push $($ENV:DOCKER_USERNAME)/$($ENV:DOCKER_REPO_NAME):v2
                 echo "----------------------------Deploying Project Completed-----------------------------"
                 '''
-            }*/
-        }
+            }
+        }*/
     }
 }
