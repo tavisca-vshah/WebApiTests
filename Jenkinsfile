@@ -7,7 +7,7 @@ pipeline {
         string(name: 'SOLUTION_NAME', defaultValue: 'WebApi')
         string(name: 'DOCKER_USERNAME', defaultValue: 'vshahks4578')
         string(name: 'DOCKER_PASSWORD');
-        string(name: 'DOCKER_REPO_NAME', defaultValue: 'webapi')
+        string(name: 'DOCKER_REPO_NAME')
         
 
   }
